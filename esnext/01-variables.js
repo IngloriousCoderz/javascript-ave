@@ -63,9 +63,10 @@ console.log(shouldBeNaN); // returns Infinite, mathematically wrong!
 const PI = 3.14;
 const PRIMARY_COLOR = "#b543df"; // upper snake case
 
-const WORKING_DAYS_IN_A_WEEK = 5
+const WORKING_DAYS_IN_A_WEEK = 5;
 
-for (let i = 0; i < WORKING_DAYS_IN_A_WEEK; i++) { // magic number
+for (let i = 0; i < WORKING_DAYS_IN_A_WEEK; i++) {
+  // magic number
   console.log(i);
 }
 

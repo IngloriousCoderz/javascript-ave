@@ -14,10 +14,11 @@
 {
   // no function hoisting
 
-  const sum = function (a, b) { // anonymous function
+  const sum = function (a, b) {
+    // anonymous function
     return a + b;
   };
-  
+
   console.log(sum(2, 3));
 }
 
@@ -26,7 +27,8 @@
 {
   // no function hoisting
 
-  const sum = (a, b) => { // anonymous function
+  const sum = (a, b) => {
+    // anonymous function
     return a + b;
   };
 
@@ -36,35 +38,36 @@
 function contextPreservation() {
   // Advantage 1: context preservation
 
-  const html = "<html><head></head><body><button>Click me!</button></body></html>"
-  const button = document.querySelector("button")
-  console.log(this) // window
+  const html =
+    "<html><head></head><body><button>Click me!</button></body></html>";
+  const button = document.querySelector("button");
+  console.log(this); // window
 
   // 1. this === event.target
-  button.onclick = function(event) {
-      console.log(this, event.target); // button, button
-  }
+  button.onclick = function (event) {
+    console.log(this, event.target); // button, button
+  };
 
   // 2. auxiliary variable
   const self = this;
-  button.onclick = function(event) {
-      console.log(self, event.target); // window, button
-  }
+  button.onclick = function (event) {
+    console.log(self, event.target); // window, button
+  };
 
   // 3. function binding
-  button.onclick = function(event) {
-      console.log(this, event.target); // window, button
+  button.onclick = function (event) {
+    console.log(this, event.target); // window, button
   }.bind(window);
 
   // 4. arrow function - automatic binding
   button.onclick = (event) => {
-      console.log(this, event.target); // window, button
+    console.log(this, event.target); // window, button
   };
 
   // 5. arrow function - concise version
   button.onclick = (event) => console.log(this, event.target); // window, button
 
-  button.addEventHandler("click", (event) => console.log(this, event.target)) // new event handler
+  button.addEventHandler("click", (event) => console.log(this, event.target)); // new event handler
 }
 
 {
