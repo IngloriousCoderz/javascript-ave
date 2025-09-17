@@ -26,7 +26,7 @@ const lastCharacter = url[url.length - 1];
 console.log(firstCharacter, lastCharacter);
 
 url[2] = "x";
-console.log(url);
+console.log(url); // strings are immutable
 
 console.log(url.slice(0, 2) + "x" + url.slice(3));
 console.log(`${url.slice(0, 2)}x${url.slice(3)}`);
