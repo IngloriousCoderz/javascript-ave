@@ -80,3 +80,21 @@ function contextPreservation() {
 
 // 1. Always use function declarations
 // 2. For event handlers, you may use arrow functions
+
+{
+  function sum(a, b) {
+    if (typeof a === undefined) {
+      a = 0;
+    }
+    if (typeof b === undefined) {
+      b = 0;
+    }
+    return a + b;
+  }
+}
+
+{
+  function sum(a = 0, b = 0) {
+    return a + b;
+  }
+}
