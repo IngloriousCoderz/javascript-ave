@@ -128,23 +128,39 @@
 //   console.log(firstResult);
 // });
 
-fetch("https://www.swapi.tech/api/people/1/")
+const promise1 = fetch("https://www.swapi.tech/api/people/1/")
   .then((response) => response.json())
   .then((data) => {
     console.log(data);
   })
   .catch((error) => console.error(error));
 
-const promise = new Promise((resolve, reject) => {
+// fetch(url1, {
+//   method: "POST",
+//   body: JSON.stringify({}),
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// })
+//   .then((response) => response.json())
+//   .then((data) => console.log(data));
+
+// promisify
+
+const promise2 = new Promise((resolve, reject) => {
   setTimeout(() => {
     reject("Timeout!");
   }, 3000);
 });
 
-promise
-  .then((message) => {
-    console.log(message);
-  })
-  .catch((message) => {
-    console.log(message);
-  });
+// promise
+//   .then((message) => {
+//     console.log(message);
+//   })
+//   .catch((message) => {
+//     console.log(message);
+//   });
+
+Promise.race([promise1, promise2])
+  .then((response) => console.log(response))
+  .catch((timeoutError) => console.error(timeoutError));
