@@ -8,10 +8,6 @@ const tasks = ref([
   { id: 2, title: 'Go to work', completed: false },
 ])
 
-function handleInput(event) {
-  text.value = event.target.value
-}
-
 function handleSubmit() {
   const maxId = tasks.value.length ? tasks.value[tasks.value.length - 1].id : 0
   const newTask = { id: maxId + 1, title: text.value, completed: false }
@@ -34,7 +30,7 @@ function handleRemove(index) {
   <h1>Todo List</h1>
 
   <form @submit.prevent="handleSubmit">
-    <input placeholder="What next?" autofocus :value="text" @input="handleInput" />
+    <input placeholder="What next?" autofocus v-model="text" />
     <button :disabled="!text">Add</button>
   </form>
 
