@@ -39,3 +39,9 @@ pnpm test:unit
 ```sh
 pnpm lint
 ```
+
+### Run API Server
+
+```sh
+pnpm api
+```

@@ -4,24 +4,36 @@ import { ref } from 'vue'
 import TodoHeader from './TodoHeader.vue'
 import TodoList from './TodoList.vue'
 import TodoForm from './TodoForm.vue'
+import * as api from './services/api'
 
-const tasks = ref([
-  { id: 1, title: 'Learn Vue 3', completed: true },
-  { id: 2, title: 'Go to work', completed: false },
-])
+const tasks = ref([])
 
-function handleSubmit(value) {
-  const maxId = tasks.value.length ? tasks.value[tasks.value.length - 1].id : 0
-  const newTask = { id: maxId + 1, title: value, completed: false }
+api.fetchTasks().then((data) => (tasks.value = data))
+
+async function handleSubmit(value) {
+  const newTask = await api.createTask(value)
   tasks.value.push(newTask)
+
+  // optimistic update variant
+  // tasks.value.push({ id: 'temp', title: value })
+  // try {
+  //   const newTask = await api.createTask(value)
+  //   tasks.value.pop()
+  //   tasks.value.push(newTask)
+  // } catch {
+  //   tasks.value.pop()
+  // }
 }
 
-function handleToggle(index) {
-  const task = tasks.value[index]
-  task.completed = !task.completed
+async function handleToggle(index) {
+  const taskToUpdate = tasks.value[index]
+  const updatedTask = await api.updateTask(taskToUpdate.id, { completed: !taskToUpdate.completed })
+  tasks.value[index] = updatedTask
 }
 
-function handleRemove(index) {
+async function handleRemove(index) {
+  const taskToRemove = tasks.value[index]
+  await api.removeTask(taskToRemove.id)
   tasks.value.splice(index, 1)
 }
 </script>
