@@ -1,13 +1,12 @@
 <script setup>
 import { ref } from 'vue'
-import { useListStore } from './stores/list'
 
-const list = useListStore()
+const emit = defineEmits(['submit'])
 
 const text = ref('')
 
 function handleSubmit() {
-  list.handleSubmit(text.value)
+  emit('submit', text.value)
   text.value = ''
 }
 </script>
